@@ -51,39 +51,61 @@ export default function Contact({prefill}) {
 
   const subject = `Website enquiry: ${values.business.trim() || values.name.trim()}`;
 
+  /* Sends the enquiry to your inbox. Uses Web3Forms when a key is set,
+     otherwise FormSubmit (no sign-up; the very first enquiry sends an
+     activation email to CONTACT.email that must be confirmed once). */
+  const sendEnquiry = async () => {
+    const reach = values.reach.trim();
+    const isEmail = reach.includes("@");
+    const fields = {
+      name: values.name.trim(),
+      contact: reach,
+      business: values.business.trim() || "-",
+      need: values.type || "Not sure yet",
+      message: values.message.trim()
+    };
+    const request = CONTACT.web3formsKey
+      ? {
+          url: "https://api.web3forms.com/submit",
+          body: {
+            access_key: CONTACT.web3formsKey,
+            subject,
+            from_name: "Website enquiry form",
+            // Lets you hit "Reply" in your inbox when they left an email.
+            ...(isEmail ? {email: reach} : {}),
+            ...fields,
+            botcheck: values.botcheck
+          }
+        }
+      : {
+          url: `https://formsubmit.co/ajax/${CONTACT.email}`,
+          body: {
+            _subject: subject,
+            _template: "table",
+            _captcha: "false",
+            ...(isEmail ? {_replyto: reach} : {}),
+            ...fields,
+            _honey: values.botcheck ? "spam" : ""
+          }
+        };
+
+    const res = await fetch(request.url, {
+      method: "POST",
+      headers: {"Content-Type": "application/json", Accept: "application/json"},
+      body: JSON.stringify(request.body)
+    });
+    const data = await res.json().catch(() => ({}));
+    // Web3Forms returns success as a boolean, FormSubmit as a string.
+    if (!res.ok || String(data.success) !== "true") throw new Error(data.message);
+  };
+
   const submit = async e => {
     e.preventDefault();
     if (status === "sending" || !validate()) return;
 
-    if (!CONTACT.web3formsKey) {
-      window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(summary())}`;
-      return;
-    }
-
     setStatus("sending");
-    const reach = values.reach.trim();
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {"Content-Type": "application/json", Accept: "application/json"},
-        body: JSON.stringify({
-          access_key: CONTACT.web3formsKey,
-          subject,
-          from_name: "Website enquiry form",
-          name: values.name.trim(),
-          // Lets you hit "Reply" in your inbox when they left an email.
-          ...(reach.includes("@") ? {email: reach} : {}),
-          contact: reach,
-          business: values.business.trim() || "-",
-          need: values.type || "Not sure yet",
-          message: values.message.trim(),
-          botcheck: values.botcheck
-        })
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.success === false) throw new Error();
+      await sendEnquiry();
       setValues(empty);
       setStatus("sent");
     } catch (err) {

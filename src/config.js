@@ -7,9 +7,11 @@ export const CONTACT = {
   // WhatsApp / phone number with country code, digits only.
   phone: "917027098656",
   email: "sahil84330@gmail.com",
-  // Free key from https://web3forms.com. With a key, the quote form emails
-  // enquiries straight to your inbox; without one, "Send enquiry" opens the
-  // visitor's email app instead. The key is safe to publish.
+  // Enquiries from the quote form are emailed to `email` above.
+  // With no key they go through FormSubmit (formsubmit.co): the FIRST enquiry
+  // sends an activation email to `email` — open it and click "Activate Form"
+  // once. Optional: paste a free key from https://web3forms.com here to use
+  // Web3Forms instead. Either way the key/email is safe to publish.
   web3formsKey: "",
   portfolio: "https://sahilgupta03.github.io/sahil_portfolio/",
   linkedin: "https://www.linkedin.com/in/sahil-gupta-169759190"
