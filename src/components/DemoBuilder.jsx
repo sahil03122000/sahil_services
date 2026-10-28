@@ -1,5 +1,5 @@
-import React, {useCallback, useRef, useState} from "react";
-import {Check, Eye, Lock} from "lucide-react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
+import {Check, Eye, ImagePlus, Lock, X} from "lucide-react";
 import DemoWindow from "./DemoWindow";
 import {COLORS, TEMPLATES} from "../demo/templates";
 import {Reveal} from "../hooks/useReveal";
@@ -12,7 +12,8 @@ export default function DemoBuilder() {
     type: typeIds[0],
     city: "",
     phone: "",
-    color: COLORS[0].value
+    color: COLORS[0].value,
+    logo: null
   });
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
@@ -22,6 +23,33 @@ export default function DemoBuilder() {
     setOpen(false);
     submitRef.current?.focus();
   }, []);
+
+  // The logo stays in the browser as a temporary object URL — never uploaded.
+  const logoInput = useRef(null);
+  const pickLogo = e => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      setError("Please choose an image file (PNG or JPG).");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError("That image is too large — please use one under 5 MB.");
+      return;
+    }
+    setError("");
+    setDetails(d => ({...d, logo: URL.createObjectURL(file)}));
+  };
+  const removeLogo = () => setDetails(d => ({...d, logo: null}));
+
+  // Free the previous image when the logo changes or the section unmounts.
+  useEffect(() => {
+    const url = details.logo;
+    return () => {
+      if (url) URL.revokeObjectURL(url);
+    };
+  }, [details.logo]);
 
   const update = e => {
     const {name, value} = e.target;
@@ -47,15 +75,16 @@ export default function DemoBuilder() {
         <Reveal className="demo-builder__intro">
           <p className="eyebrow">Free demo</p>
           <h2 id="demo-title" className="section-title">
-            See <em>your website</em> before you pay
+            See <em>your brand</em> before you pay
           </h2>
           <p className="section-lead">
-            Enter your business details and instantly see a sample website made
-            for your business — on desktop and mobile.
+            Enter your business details and instantly see your website — plus
+            your logo on t-shirts, mugs, caps, visiting cards and banners.
           </p>
           <ul className="demo-builder__points">
             <li><Check size={16} strokeWidth={3} /> Free, takes 10 seconds</li>
-            <li><Check size={16} strokeWidth={3} /> 8 business types, 8 colours</li>
+            <li><Check size={16} strokeWidth={3} /> Website demo + merchandise mockups</li>
+            <li><Check size={16} strokeWidth={3} /> Add your logo, pick from 8 colours</li>
             <li><Lock size={16} /> Your details stay on your device — nothing is sent</li>
           </ul>
         </Reveal>
@@ -101,6 +130,35 @@ export default function DemoBuilder() {
                   maxLength={15}
                 />
               </label>
+            </div>
+
+            <div className="logo-pick">
+              <span className="logo-pick__label">Your logo (optional)</span>
+              <div className="logo-pick__row">
+                <span className="logo-pick__preview" style={{background: details.logo ? "#fff" : details.color}}>
+                  {details.logo ? (
+                    <img src={details.logo} alt="Your logo preview" />
+                  ) : (
+                    <ImagePlus size={20} aria-hidden="true" />
+                  )}
+                </span>
+                <button type="button" className="logo-pick__btn" onClick={() => logoInput.current?.click()}>
+                  {details.logo ? "Change logo" : "Upload logo"}
+                </button>
+                {details.logo && (
+                  <button type="button" className="logo-pick__remove" onClick={removeLogo} aria-label="Remove logo">
+                    <X size={16} />
+                  </button>
+                )}
+                <input
+                  ref={logoInput}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                  onChange={pickLogo}
+                  hidden
+                />
+              </div>
+              <small>Shown on your website & merchandise demo. Stays on your device.</small>
             </div>
 
             <fieldset className="swatches">

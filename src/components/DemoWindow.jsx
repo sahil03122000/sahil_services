@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Check, Loader2, Monitor, Pencil, Smartphone, X} from "lucide-react";
+import {Check, Globe, Loader2, Monitor, Pencil, Shirt, Smartphone, X} from "lucide-react";
 import DemoSite from "./DemoSite";
+import MerchDemo from "./MerchDemo";
 import WhatsAppIcon from "./WhatsAppIcon";
 import {CONTACT, priceOf, whatsappUrl} from "../config";
 import {TEMPLATES} from "../demo/templates";
@@ -21,6 +22,8 @@ const block = e => e.preventDefault();
    cannot stop a determined developer. */
 export default function DemoWindow({details, onClose}) {
   const [device, setDevice] = useState("desktop");
+  const [view, setView] = useState("website"); // website | merch
+  const isSite = view === "website";
   // Short "building your website" sequence before the preview appears.
   const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const [step, setStep] = useState(reduceMotion ? BUILD_STEPS.length : 0);
@@ -49,9 +52,10 @@ export default function DemoWindow({details, onClose}) {
     };
   }, [onClose]);
 
-  const message = `Hi Sahil, I saw the demo website for "${details.name}" (${t.label}${
-    details.city ? `, ${details.city}` : ""
-  }) on your site. I'd like to get my website made.`;
+  const where = `"${details.name}" (${t.label}${details.city ? `, ${details.city}` : ""})`;
+  const message = isSite
+    ? `Hi Sahil, I saw the demo website for ${where} on your site. I'd like to get my website made.`
+    : `Hi Sahil, I saw the merchandise demo for ${where} on your site. I'd like a quote for printing (t-shirts / mugs / cards / banners).`;
 
   return (
     <div className="demo-overlay" role="dialog" aria-modal="true" aria-labelledby="demo-window-title">
@@ -59,12 +63,33 @@ export default function DemoWindow({details, onClose}) {
         <div className="demo-window__top">
           <div>
             <p id="demo-window-title" className="demo-window__title">
-              Your website demo
+              Your brand demo
             </p>
             <p className="demo-window__sub">A sample design for {details.name}</p>
           </div>
 
-          <div className="demo-device" role="radiogroup" aria-label="Preview size">
+          <div className="demo-views" role="tablist" aria-label="Demo type">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={isSite}
+              className={isSite ? "is-active" : ""}
+              onClick={() => setView("website")}
+            >
+              <Globe size={16} /> Website
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={!isSite}
+              className={!isSite ? "is-active" : ""}
+              onClick={() => setView("merch")}
+            >
+              <Shirt size={16} /> Merchandise
+            </button>
+          </div>
+
+          <div className="demo-device" role="radiogroup" aria-label="Preview size" hidden={!isSite}>
             <button
               type="button"
               role="radio"
@@ -91,17 +116,17 @@ export default function DemoWindow({details, onClose}) {
         </div>
 
         <div className="demo-stage">
-          <div className={`demo-frame demo-frame--${device}`}>
+          <div className={`demo-frame demo-frame--${isSite ? device : "merch"}`}>
             <div className="demo-frame__bar" aria-hidden="true">
               <i />
               <i />
               <i />
-              <span>{slug(details.name)}.in</span>
+              <span>{isSite ? `${slug(details.name)}.in` : `${details.name} · merchandise preview`}</span>
             </div>
             {building && (
               <div className="demo-build" role="status" aria-live="polite">
-                <span className="demo-build__logo" style={{background: details.color}}>
-                  {details.name.slice(0, 1).toUpperCase()}
+                <span className="demo-build__logo" style={{background: details.logo ? "#fff" : details.color}}>
+                  {details.logo ? <img src={details.logo} alt="" /> : details.name.slice(0, 1).toUpperCase()}
                 </span>
                 <p className="demo-build__title">Building {details.name}…</p>
                 <ul>
@@ -117,7 +142,7 @@ export default function DemoWindow({details, onClose}) {
                 </span>
               </div>
             )}
-            <div className={`demo-frame__viewport ${building ? "is-hidden" : "is-ready"}`}>
+            <div key={view} className={`demo-frame__viewport ${building ? "is-hidden" : "is-ready"}`}>
               <div
                 className="demo-frame__content"
                 onContextMenu={block}
@@ -125,7 +150,7 @@ export default function DemoWindow({details, onClose}) {
                 onCut={block}
                 onDragStart={block}
               >
-                <DemoSite details={details} />
+                {isSite ? <DemoSite details={details} /> : <MerchDemo details={details} />}
                 <div className="demo-shield" style={{backgroundImage: watermark}} aria-hidden="true" />
               </div>
             </div>
@@ -134,21 +159,36 @@ export default function DemoWindow({details, onClose}) {
 
         <div className="demo-window__bottom">
           <div className="demo-window__pitch">
-            <p className="demo-window__price">
-              Get this website from <b>₹{priceOf("website").toLocaleString("en-IN")}</b>
-              <span> · live in 7–10 days</span>
-            </p>
-            <p className="demo-window__note">
-              Sample text, numbers & reviews — your site gets your real details,
-              photos and a fully custom design.
-            </p>
+            {isSite ? (
+              <>
+                <p className="demo-window__price">
+                  Get this website from <b>₹{priceOf("website").toLocaleString("en-IN")}</b>
+                  <span> · live in 7–10 days</span>
+                </p>
+                <p className="demo-window__note">
+                  Sample text, numbers & reviews — your site gets your real details,
+                  photos and a fully custom design.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="demo-window__price">
+                  Get these printed — <b>free quote</b>
+                  <span> · bulk orders for businesses</span>
+                </p>
+                <p className="demo-window__note">
+                  Mockups for preview — final colours, sizes and print style are
+                  confirmed with you before printing.
+                </p>
+              </>
+            )}
           </div>
           <div className="demo-window__actions">
             <button type="button" className="btn btn--light" onClick={onClose}>
               <Pencil size={16} /> Edit details
             </button>
             <a className="btn btn--whatsapp" href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">
-              <WhatsAppIcon size={18} /> Get this website
+              <WhatsAppIcon size={18} /> {isSite ? "Get this website" : "Get a printing quote"}
             </a>
           </div>
         </div>

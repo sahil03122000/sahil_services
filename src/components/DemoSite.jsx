@@ -3,14 +3,16 @@ import {ArrowRight, Check, Clock, MapPin, Phone, Quote, Star} from "lucide-react
 import WhatsAppIcon from "./WhatsAppIcon";
 import {TEMPLATES} from "../demo/templates";
 import {PEOPLE, REVIEWS, WIDGETS} from "../demo/extras";
+import {initials} from "../demo/utils";
 
-const initials = name =>
-  name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map(w => w[0].toUpperCase())
-    .join("") || "B";
+const LogoMark = ({details}) =>
+  details.logo ? (
+    <span className="ds-logo__mark ds-logo__mark--img">
+      <img src={details.logo} alt="" />
+    </span>
+  ) : (
+    <span className="ds-logo__mark">{initials(details.name)}</span>
+  );
 
 /* The hero's "live" card — a booking form or a price list, per business type. */
 function HeroWidget({widget, fill}) {
@@ -85,7 +87,7 @@ export default function DemoSite({details}) {
 
       <header className="ds-nav">
         <span className="ds-logo">
-          <span className="ds-logo__mark">{initials(details.name)}</span>
+          <LogoMark details={details} />
           <span className="ds-logo__name">{details.name}</span>
         </span>
         <nav className="ds-nav__links" aria-hidden="true">
@@ -273,7 +275,7 @@ export default function DemoSite({details}) {
 
       <footer className="ds-footer">
         <span className="ds-logo">
-          <span className="ds-logo__mark">{initials(details.name)}</span>
+          <LogoMark details={details} />
           <span className="ds-logo__name">{details.name}</span>
         </span>
         <small>

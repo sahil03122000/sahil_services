@@ -1202,3 +1202,69 @@ body.demo-open .fab, body.demo-open .estimate-bar { display: none; }
   display: grid; place-items: center; width: 54px; height: 54px; margin: -70px 16px 16px auto;
   border-radius: 50%; background: #25d366; color: #fff; box-shadow: 0 12px 24px -8px rgba(37, 211, 102, 0.8);
 }
+
+/* =========================================================================
+   Free demo — logo upload, view tabs, merchandise mockups
+   ========================================================================= */
+.logo-pick { display: grid; gap: 8px; }
+.logo-pick__label { font-size: 0.88rem; font-weight: 700; color: var(--ink-2); }
+.logo-pick__row { display: flex; align-items: center; gap: 10px; }
+.logo-pick__preview {
+  display: grid; place-items: center; flex-shrink: 0; width: 48px; height: 48px; overflow: hidden;
+  border-radius: 14px; border: 1.5px solid var(--line-2); color: #fff;
+}
+.logo-pick__preview img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.logo-pick__btn {
+  min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1.5px dashed var(--violet-2);
+  background: var(--violet-soft); color: var(--violet); font-weight: 700; cursor: pointer;
+}
+.logo-pick__btn:hover { background: #e6dfff; }
+.logo-pick__remove {
+  display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px;
+  border: 1px solid var(--line-2); background: #fff; color: var(--muted); cursor: pointer;
+}
+.logo-pick small { font-size: 0.78rem; color: var(--muted); }
+
+.demo-build__logo { overflow: hidden; }
+.demo-build__logo img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+.ds-logo__mark--img { background: #fff !important; border: 1px solid #eef0f4; overflow: hidden; }
+.ds-logo__mark--img img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+
+.demo-views { display: flex; padding: 4px; border-radius: 12px; background: rgba(255, 255, 255, 0.08); order: 2; width: 100%; }
+@media (min-width: 560px) { .demo-views { order: 0; width: auto; } }
+.demo-views button {
+  flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 36px; padding: 6px 14px; border: 0; border-radius: 9px;
+  background: transparent; color: var(--on-night-muted); font-weight: 700; font-size: 0.85rem; cursor: pointer;
+}
+.demo-views button.is-active { background: var(--grad); color: #fff; }
+.demo-device[hidden] { display: none; }
+.demo-frame--merch { max-width: 1180px; }
+
+.merch {
+  --ds: #6d4cff;
+  container-type: inline-size;
+  padding: 28px 18px 36px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, color-mix(in srgb, var(--ds) 14%, #fff), transparent 70%),
+    #f8f9fb;
+  color: #111827; font-family: var(--font);
+}
+@container (min-width: 700px) { .merch { padding: 40px; } }
+.merch__head { text-align: center; margin-bottom: 26px; }
+.merch__kicker { color: var(--ds); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.merch__head h2 { margin: 6px 0 8px; font-size: clamp(1.35rem, 1rem + 2cqi, 2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
+.merch__head p { color: #6b7280; font-size: 0.92rem; }
+.merch__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@container (min-width: 760px) { .merch__grid { grid-template-columns: repeat(4, 1fr); } }
+.merch__item { margin: 0; display: grid; gap: 8px; }
+.merch__item--wide { grid-column: 1 / -1; }
+@container (min-width: 760px) { .merch__item--wide { grid-column: span 2; } }
+.merch__stage {
+  display: grid; place-items: center; aspect-ratio: 1; padding: 10px;
+  border-radius: 18px; background: #fff; border: 1px solid #eef0f4;
+  box-shadow: 0 10px 26px -18px rgba(0, 0, 0, 0.35);
+}
+.merch__item--wide .merch__stage { aspect-ratio: 2 / 1; }
+.merch__stage svg { width: 100%; height: 100%; }
+.merch__item figcaption { text-align: center; font-size: 0.85rem; font-weight: 700; color: #374151; }
