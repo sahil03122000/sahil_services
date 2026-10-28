@@ -377,6 +377,7 @@ button { font: inherit; }
 .tab--orange { --tone: var(--orange); }
 .tab--pink { --tone: var(--pink); }
 .tab--teal { --tone: var(--teal); }
+.tab--blue { --tone: var(--blue); }
 .tab__label { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; }
 .tab__blurb { font-size: 0.8rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
 .tab__count {
@@ -420,6 +421,7 @@ button { font: inherit; }
 .service-card--orange { --tone: var(--orange); }
 .service-card--pink { --tone: var(--pink); }
 .service-card--teal { --tone: var(--teal); }
+.service-card--blue { --tone: var(--blue); }
 @keyframes card-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
 .service-card__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }

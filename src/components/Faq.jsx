@@ -32,8 +32,8 @@ const faqs = [
     a: "Yes. Choose \"Only branding / marketing\" in the price calculator and pick just the services you need."
   },
   {
-    q: "Do you make t-shirts, mugs and visiting cards?",
-    a: "Yes, for businesses. I design your branded merchandise — staff t-shirts, hoodies, caps, mugs, visiting cards, ID cards — and get it printed through my trusted print partner. Price and delivery time depend on the item and quantity, so you get a clear quote first."
+    q: "Do you also do printing — t-shirts, mugs, flex, pamphlets?",
+    a: "Yes, for businesses. T-shirts, hoodies, mugs, caps, flex banners, shop boards, pamphlets, brochures, visiting cards, bill books and more — I design them and get them printed through my trusted print partner. Price and delivery time depend on the item and quantity, so you get a clear quote first."
   },
   {
     q: "How do payments work?",

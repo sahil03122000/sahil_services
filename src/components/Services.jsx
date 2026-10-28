@@ -1,13 +1,17 @@
 import React, {useEffect, useRef, useState} from "react";
 import {
   CalendarCheck,
+  Coffee,
+  CreditCard,
   Globe,
   Images,
   LayoutDashboard,
   LifeBuoy,
   MapPin,
   Megaphone,
+  Newspaper,
   PenTool,
+  Presentation,
   Search,
   Server,
   ShoppingBag,
@@ -58,8 +62,20 @@ const categories = [
     tone: "pink",
     items: [
       {Icon: PenTool, title: "Logo & branding", text: "A memorable logo with brand colours and fonts, plus visiting card and letterhead designs.", tags: ["Logo", "Brand kit"], price: "logo"},
-      {Icon: ImageIcon, title: "Banners & posters", text: "Shop flex banners, posters, brochures, menu cards and digital banners — ready to print or post.", tags: ["Print-ready", "Digital"], price: "banners"},
-      {Icon: Shirt, title: "Branded merchandise", text: "Your logo on staff t-shirts, hoodies, caps, coffee mugs, visiting cards, ID cards and diaries — designed by me, printed by my trusted print partner.", tags: ["T-shirts & hoodies", "Mugs & caps", "Cards & ID cards", "For businesses"]}
+      {Icon: ImageIcon, title: "Banner & poster design", text: "Designs for flex banners, posters, brochures, menu cards and social media — ready to print or post. Need them printed too? See the Print tab.", tags: ["Print-ready files", "Digital"], price: "banners"}
+    ]
+  },
+  {
+    id: "print",
+    label: "Print",
+    blurb: "Merchandise & printing",
+    tone: "blue",
+    items: [
+      {Icon: Shirt, title: "T-shirts & hoodies", text: "Staff uniforms, event t-shirts and hoodies with your logo — designed by me, printed by my trusted print partner.", tags: ["Staff uniforms", "Events", "Bulk orders"]},
+      {Icon: Coffee, title: "Mugs, caps & gifts", text: "Coffee mugs, caps, diaries, pens and keychains with your logo — for staff, clients and festive gifting.", tags: ["Coffee mugs", "Caps", "Corporate gifts"]},
+      {Icon: Presentation, title: "Flex & banners", text: "Shop boards, flex banners, standees and event backdrops — designed and printed in the size you need.", tags: ["Shop boards", "Standees", "Any size"]},
+      {Icon: Newspaper, title: "Pamphlets & brochures", text: "Pamphlets, flyers, brochures and menu cards for your promotions — designed and printed in bulk.", tags: ["Flyers", "Brochures", "Menu cards"]},
+      {Icon: CreditCard, title: "Cards & stationery", text: "Visiting cards, letterheads, bill books, stickers and ID cards — everything with your brand on it.", tags: ["Visiting cards", "Bill books", "ID cards"]}
     ]
   },
   {
