@@ -1,9 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Monitor, Pencil, Smartphone, X} from "lucide-react";
+import {Check, Loader2, Monitor, Pencil, Smartphone, X} from "lucide-react";
 import DemoSite from "./DemoSite";
 import WhatsAppIcon from "./WhatsAppIcon";
-import {CONTACT, whatsappUrl} from "../config";
+import {CONTACT, priceOf, whatsappUrl} from "../config";
 import {TEMPLATES} from "../demo/templates";
+import {BUILD_STEPS} from "../demo/extras";
 
 const slug = name => name.toLowerCase().replace(/[^a-z0-9]+/g, "").slice(0, 24) || "yourbusiness";
 
@@ -20,6 +21,16 @@ const block = e => e.preventDefault();
    cannot stop a determined developer. */
 export default function DemoWindow({details, onClose}) {
   const [device, setDevice] = useState("desktop");
+  // Short "building your website" sequence before the preview appears.
+  const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  const [step, setStep] = useState(reduceMotion ? BUILD_STEPS.length : 0);
+  const building = step < BUILD_STEPS.length;
+
+  useEffect(() => {
+    if (!building) return undefined;
+    const timer = setTimeout(() => setStep(s => s + 1), 520);
+    return () => clearTimeout(timer);
+  }, [step, building]);
   const closeRef = useRef(null);
   const t = TEMPLATES[details.type];
 
@@ -87,7 +98,26 @@ export default function DemoWindow({details, onClose}) {
               <i />
               <span>{slug(details.name)}.in</span>
             </div>
-            <div className="demo-frame__viewport">
+            {building && (
+              <div className="demo-build" role="status" aria-live="polite">
+                <span className="demo-build__logo" style={{background: details.color}}>
+                  {details.name.slice(0, 1).toUpperCase()}
+                </span>
+                <p className="demo-build__title">Building {details.name}…</p>
+                <ul>
+                  {BUILD_STEPS.map((label, i) => (
+                    <li key={label} className={i < step ? "is-done" : i === step ? "is-now" : ""}>
+                      {i < step ? <Check size={16} strokeWidth={3} /> : <Loader2 size={16} className="spin" />}
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+                <span className="demo-build__bar">
+                  <span style={{width: `${(step / BUILD_STEPS.length) * 100}%`, background: details.color}} />
+                </span>
+              </div>
+            )}
+            <div className={`demo-frame__viewport ${building ? "is-hidden" : "is-ready"}`}>
               <div
                 className="demo-frame__content"
                 onContextMenu={block}
@@ -103,10 +133,16 @@ export default function DemoWindow({details, onClose}) {
         </div>
 
         <div className="demo-window__bottom">
-          <p>
-            <b>Like it?</b> This is just a quick sample — your real website gets
-            your photos, content and a fully custom design.
-          </p>
+          <div className="demo-window__pitch">
+            <p className="demo-window__price">
+              Get this website from <b>₹{priceOf("website").toLocaleString("en-IN")}</b>
+              <span> · live in 7–10 days</span>
+            </p>
+            <p className="demo-window__note">
+              Sample text, numbers & reviews — your site gets your real details,
+              photos and a fully custom design.
+            </p>
+          </div>
           <div className="demo-window__actions">
             <button type="button" className="btn btn--light" onClick={onClose}>
               <Pencil size={16} /> Edit details
