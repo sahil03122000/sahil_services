@@ -5,6 +5,7 @@ import Marquee from "./components/Marquee";
 import Services from "./components/Services";
 import Calculator from "./components/Calculator";
 import Work from "./components/Work";
+import About from "./components/About";
 import Process from "./components/Process";
 import Why from "./components/Why";
 import Faq from "./components/Faq";
@@ -29,6 +30,7 @@ export default function App() {
         <Services />
         <Calculator onGetQuote={setPrefill} />
         <Work />
+        <About />
         <Process />
         <Why />
         <Faq />

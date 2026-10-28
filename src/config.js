@@ -13,6 +13,9 @@ export const CONTACT = {
   // once. Optional: paste a free key from https://web3forms.com here to use
   // Web3Forms instead. Either way the key/email is safe to publish.
   web3formsKey: "",
+  // Your photo for the About section: put the file in public/assets/ and
+  // write its name here, e.g. "sahil.jpg". Leave empty to show initials.
+  photo: "",
   portfolio: "https://sahilgupta03.github.io/sahil_portfolio/",
   linkedin: "https://www.linkedin.com/in/sahil-gupta-169759190"
 };
