@@ -1,40 +1,51 @@
 # Sahil Gupta — Websites & Apps (services site)
 
-Client-facing website for freelance web and app work. Kept separate from the
-developer portfolio (https://sahilgupta03.github.io/sahil_portfolio/), which is
-for jobs and recruiters.
+Client-facing website for freelance web and app work, with a live price
+calculator. Kept separate from the developer portfolio
+(https://sahilgupta03.github.io/sahil_portfolio/), which is for jobs and
+recruiters.
 
-Plain HTML, CSS and JavaScript — no build step, so it loads fast on slow
-mobile data and deploys to GitHub Pages as-is.
+Built with React + Vite. Icons from `lucide-react`.
 
-## Files
+## Edit the content
 
-```
-index.html   all page content (services, work, FAQ, contact form)
-styles.css   design and layout
-script.js    WhatsApp / call / email links and the quote form
-assets/      project screenshots and icons
-```
+Almost everything you'll want to change is in **`src/config.js`**:
 
-## Settings
+- `CONTACT` — WhatsApp/phone number, email, Web3Forms key, links
+- `PRICING` — every price used by the calculator: project base prices,
+  per-page price, add-on features, design/urgency multipliers, and the
+  range shown to visitors
 
-Edit the `CONFIG` block at the top of `script.js`:
+Section text lives in `src/components/` (one file per section).
 
-- `phone` — WhatsApp and call number, country code first, digits only
-- `email` — where email links and the fallback form point
-- `web3formsKey` — free key from https://web3forms.com. With a key, the quote
-  form emails enquiries straight to your inbox; without one, "Send enquiry"
-  opens the visitor's email app.
+### Email enquiries (Web3Forms)
 
-## Run locally
+Get a free key at https://web3forms.com and paste it into
+`CONTACT.web3formsKey`. With a key, the quote form emails enquiries straight
+to your inbox; without one, "Send enquiry" opens the visitor's email app.
+The key is safe to publish.
+
+## Commands
 
 ```bash
-python -m http.server 8000
+npm install        # first time only
+npm run dev        # local preview at http://localhost:5173/sahil_services/
+npm run build      # production build into dist/
+npm run deploy     # build + publish dist/ to the gh-pages branch
 ```
 
-Then open http://localhost:8000.
+The site is served from `/sahil_services/` (set in `vite.config.js`). If you
+rename the GitHub repository, update `base` there too.
 
-## Deploy
+## Structure
 
-Push to a GitHub repository and enable **Settings → Pages → Deploy from a
-branch → main / (root)**.
+```
+index.html            page shell, SEO tags, fonts
+public/assets/        project screenshots and icons
+src/config.js         contact details and calculator prices
+src/App.jsx           section order
+src/components/       Header, Hero, Marquee, Services, Calculator, Work,
+                      Process, Why, Faq, Contact, Footer, WhatsAppFab
+src/hooks/useReveal   scroll-in animations
+src/styles.css        design tokens and all styles
+```
