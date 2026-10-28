@@ -24,6 +24,14 @@ const faqs = [
     a: "Every site is set up with the SEO basics and can be linked to your Google Business Profile, so customers searching nearby can find you."
   },
   {
+    q: "Do ad prices include the ad budget?",
+    a: "No. The monthly fee covers planning, creating and managing your ads. The ad budget itself — as little or as much as you like — is paid directly to Google or Meta."
+  },
+  {
+    q: "Can I take only SEO, a logo or banners — without a website?",
+    a: "Yes. Choose \"Only branding / marketing\" in the price calculator and pick just the services you need."
+  },
+  {
     q: "How do payments work?",
     a: "Payment terms are agreed in your quote before work starts — clear and simple, with no hidden charges."
   }

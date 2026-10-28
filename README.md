@@ -13,10 +13,14 @@ Almost everything you'll want to change is in **`src/config.js`**:
 
 - `CONTACT` — WhatsApp/phone number, email, Web3Forms key, links
 - `PRICING` — every price used by the calculator: project base prices,
-  per-page price, add-on features, design/urgency multipliers, and the
-  range shown to visitors
+  per-page price, one-time add-ons (SEO, logo, banners, WhatsApp setup…),
+  monthly services (SEO, social media, ads, maintenance), design/urgency
+  multipliers, and the range shown to visitors. The "from ₹…" labels in the
+  Services section read from here too.
 
-Section text lives in `src/components/` (one file per section).
+Section text lives in `src/components/` (one file per section). The service
+list and its four tabs (Build, Grow, Brand, Setup & care) are in
+`src/components/Services.jsx`.
 
 ### Email enquiries (Web3Forms)
 

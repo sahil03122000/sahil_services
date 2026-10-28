@@ -73,18 +73,43 @@ export const PRICING = {
       base: 35000,
       pages: false,
       days: "4–6 weeks"
+    },
+    {
+      id: "none",
+      label: "Only branding / marketing",
+      hint: "No website — just logo, banners, posts, SEO or ads",
+      base: 0,
+      pages: false,
+      noSite: true,
+      days: "starts in 2–3 days"
     }
   ],
   perExtraPage: 1000,
   maxPages: 20,
+  // One-time add-ons. `siteOnly` ones are hidden for "Only branding / marketing".
   features: [
-    {id: "payments", label: "Online payments (UPI / cards)", price: 5000},
-    {id: "admin", label: "Admin panel to edit content yourself", price: 6000},
-    {id: "seo", label: "Google SEO + Business Profile setup", price: 3000},
-    {id: "bilingual", label: "Hindi + English (two languages)", price: 4000},
-    {id: "blog", label: "Blog / news & updates section", price: 3000},
-    {id: "logo", label: "Logo design", price: 2000},
-    {id: "domain", label: "Domain + hosting setup (1st year)", price: 2500}
+    {id: "payments", label: "Online payments (UPI / cards)", price: 5000, siteOnly: true},
+    {id: "admin", label: "Admin panel to edit content yourself", price: 6000, siteOnly: true},
+    {id: "seo", label: "SEO setup (rank on Google)", price: 3000},
+    {id: "gbp", label: "Google Business Profile setup", price: 1500},
+    {id: "whatsapp", label: "WhatsApp Business setup", price: 1000},
+    {id: "bilingual", label: "Hindi + English (two languages)", price: 4000, siteOnly: true},
+    {id: "blog", label: "Blog / news & updates section", price: 3000, siteOnly: true},
+    {id: "logo", label: "Logo & brand kit", price: 2500},
+    {id: "banners", label: "Banner / poster designs (set of 3)", price: 1500},
+    {id: "domain", label: "Domain, hosting & business email (1st year)", price: 3000}
+  ],
+  // Monthly services, shown separately from the one-time price.
+  monthly: [
+    {id: "seoMonthly", label: "SEO — monthly ranking work", price: 3000},
+    {id: "social", label: "Social media posts (12 per month)", price: 4000},
+    {
+      id: "ads",
+      label: "Google / Facebook ads management",
+      price: 5000,
+      note: "Ad budget is paid directly to Google / Meta"
+    },
+    {id: "maintenance", label: "Maintenance & updates", price: 1000}
   ],
   // Always included at no extra cost.
   included: [
@@ -103,6 +128,11 @@ export const PRICING = {
   ],
   // Shown as a range: estimate × low … estimate × high.
   rangeLow: 0.9,
-  rangeHigh: 1.15,
-  supportPerMonth: 1000
+  rangeHigh: 1.15
+};
+
+// Lowest price for a calculator item, used for "from ₹…" labels.
+export const priceOf = id => {
+  const all = [...PRICING.projects.map(p => ({id: p.id, price: p.base})), ...PRICING.features, ...PRICING.monthly];
+  return all.find(item => item.id === id)?.price;
 };

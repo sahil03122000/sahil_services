@@ -9,6 +9,7 @@ import Process from "./components/Process";
 import Why from "./components/Why";
 import Faq from "./components/Faq";
 import Contact from "./components/Contact";
+import CtaBanner from "./components/CtaBanner";
 import Footer from "./components/Footer";
 import WhatsAppFab from "./components/WhatsAppFab";
 
@@ -31,6 +32,7 @@ export default function App() {
         <Process />
         <Why />
         <Faq />
+        <CtaBanner />
         <Contact prefill={prefill} />
       </main>
       <Footer />

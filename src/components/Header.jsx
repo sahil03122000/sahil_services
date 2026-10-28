@@ -39,7 +39,7 @@ export default function Header() {
           </span>
           <span className="brand__text">
             <span className="brand__name">Sahil Gupta</span>
-            <span className="brand__tag">Websites · Apps · Booking</span>
+            <span className="brand__tag">Websites · Apps · Marketing</span>
           </span>
         </a>
 

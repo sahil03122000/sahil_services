@@ -9,7 +9,7 @@ export default function Footer() {
           <span className="brand__mark" aria-hidden="true">SG</span>
           <span className="brand__text">
             <span className="brand__name">Sahil Gupta</span>
-            <span className="brand__tag">Websites · Apps · Booking</span>
+            <span className="brand__tag">Websites · Apps · Marketing</span>
           </span>
         </a>
         <nav className="footer__links" aria-label="Footer">

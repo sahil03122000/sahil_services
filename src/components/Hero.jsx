@@ -26,10 +26,18 @@ export default function Hero() {
           </h1>
 
           <p className="hero__lead">
-            Modern websites, online booking and mobile apps for clinics, CA firms,
-            coaching centres, travel agencies and local businesses — fast on every
-            phone, easy to find on Google, and connected to your WhatsApp.
+            Websites, apps, SEO, ads and branding for clinics, CA firms, coaching
+            centres, travel agencies and local businesses — everything you need
+            to get found online and win more customers, from one person.
           </p>
+
+          <ul className="hero__chips" aria-label="Services">
+            {["Websites", "Mobile apps", "Software", "SEO", "Google & FB ads", "Logo & banners", "Social media"].map(
+              chip => (
+                <li key={chip}>{chip}</li>
+              )
+            )}
+          </ul>
 
           <div className="hero__actions">
             <a
