@@ -31,7 +31,7 @@ export default function Hero() {
           </p>
 
           <ul className="hero__chips" aria-label="Services">
-            {["Websites", "Mobile apps", "Software", "SEO", "Google & FB ads", "Logo & banners", "Social media"].map(
+            {["Websites", "Mobile apps", "Software", "SEO", "Google & FB ads", "Logo & banners", "Social media", "Branded merch"].map(
               chip => (
                 <li key={chip}>{chip}</li>
               )

@@ -5,7 +5,7 @@ import {CONTACT, PRICING, prettyPhone, whatsappUrl} from "../config";
 import {Reveal} from "../hooks/useReveal";
 
 const empty = {name: "", reach: "", business: "", type: "", message: "", botcheck: false};
-const types = [...PRICING.projects.map(p => p.label), "Not sure yet"];
+const types = [...PRICING.projects.map(p => p.label), "Branded merchandise (t-shirts, mugs, cards…)", "Not sure yet"];
 
 export default function Contact({prefill}) {
   const [values, setValues] = useState(empty);

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {
   CalendarCheck,
   Globe,
@@ -13,6 +13,7 @@ import {
   ShoppingBag,
   Smartphone,
   Sparkles,
+  Shirt,
   Image as ImageIcon
 } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
@@ -57,7 +58,8 @@ const categories = [
     tone: "pink",
     items: [
       {Icon: PenTool, title: "Logo & branding", text: "A memorable logo with brand colours and fonts, plus visiting card and letterhead designs.", tags: ["Logo", "Brand kit"], price: "logo"},
-      {Icon: ImageIcon, title: "Banners & posters", text: "Shop flex banners, posters, brochures, menu cards and digital banners — ready to print or post.", tags: ["Print-ready", "Digital"], price: "banners"}
+      {Icon: ImageIcon, title: "Banners & posters", text: "Shop flex banners, posters, brochures, menu cards and digital banners — ready to print or post.", tags: ["Print-ready", "Digital"], price: "banners"},
+      {Icon: Shirt, title: "Branded merchandise", text: "Your logo on staff t-shirts, hoodies, caps, coffee mugs, visiting cards, ID cards and diaries — designed by me, printed by my trusted print partner.", tags: ["T-shirts & hoodies", "Mugs & caps", "Cards & ID cards", "For businesses"]}
     ]
   },
   {
@@ -77,6 +79,17 @@ export default function Services() {
   const [active, setActive] = useState(categories[0].id);
   const tabRefs = useRef({});
   const current = categories.find(c => c.id === active);
+
+  // On phones the tab row scrolls sideways — keep the chosen tab in view.
+  // Scrolls only the tab row, never the page.
+  useEffect(() => {
+    const tab = tabRefs.current[active];
+    const row = tab?.parentElement;
+    if (!tab || !row) return;
+    const offset = tab.getBoundingClientRect().left - row.getBoundingClientRect().left;
+    const left = row.scrollLeft + offset - (row.clientWidth - tab.offsetWidth) / 2;
+    row.scrollTo({left: Math.max(0, left), behavior: "smooth"});
+  }, [active]);
 
   // Arrow keys move between tabs (WAI-ARIA tabs pattern).
   const onKeyDown = e => {
