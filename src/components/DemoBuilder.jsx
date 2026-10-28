@@ -83,7 +83,7 @@ export default function DemoBuilder() {
           </p>
           <ul className="demo-builder__points">
             <li><Check size={16} strokeWidth={3} /> Free, takes 10 seconds</li>
-            <li><Check size={16} strokeWidth={3} /> Website demo + merchandise mockups</li>
+            <li><Check size={16} strokeWidth={3} /> Website demo + 15 merchandise mockups</li>
             <li><Check size={16} strokeWidth={3} /> Add your logo, pick from 8 colours</li>
             <li><Lock size={16} /> Your details stay on your device — nothing is sent</li>
           </ul>

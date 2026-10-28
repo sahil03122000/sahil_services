@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Check, Globe, Loader2, Monitor, Pencil, Shirt, Smartphone, X} from "lucide-react";
 import DemoSite from "./DemoSite";
-import MerchDemo from "./MerchDemo";
+import MerchDemo, {CATALOG, SUGGESTED} from "./MerchDemo";
+import MerchPicker from "./MerchPicker";
 import WhatsAppIcon from "./WhatsAppIcon";
 import {CONTACT, priceOf, whatsappUrl} from "../config";
 import {TEMPLATES} from "../demo/templates";
@@ -24,6 +25,9 @@ export default function DemoWindow({details, onClose}) {
   const [device, setDevice] = useState("desktop");
   const [view, setView] = useState("website"); // website | merch
   const isSite = view === "website";
+  const suggested = SUGGESTED[details.type];
+  const [merch, setMerch] = useState(suggested);
+  const merchLabels = CATALOG.filter(i => merch.includes(i.id)).map(i => i.label);
   // Short "building your website" sequence before the preview appears.
   const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const [step, setStep] = useState(reduceMotion ? BUILD_STEPS.length : 0);
@@ -43,7 +47,9 @@ export default function DemoWindow({details, onClose}) {
     const onKey = e => {
       if (e.key === "Escape") onClose();
       const k = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && ["s", "u", "p", "c", "a"].includes(k)) e.preventDefault();
+      const inField = /^(INPUT|TEXTAREA)$/.test(e.target.tagName);
+      const blocked = inField ? ["s", "u", "p"] : ["s", "u", "p", "c", "a"];
+      if ((e.ctrlKey || e.metaKey) && blocked.includes(k)) e.preventDefault();
     };
     document.addEventListener("keydown", onKey);
     return () => {
@@ -55,7 +61,7 @@ export default function DemoWindow({details, onClose}) {
   const where = `"${details.name}" (${t.label}${details.city ? `, ${details.city}` : ""})`;
   const message = isSite
     ? `Hi Sahil, I saw the demo website for ${where} on your site. I'd like to get my website made.`
-    : `Hi Sahil, I saw the merchandise demo for ${where} on your site. I'd like a quote for printing (t-shirts / mugs / cards / banners).`;
+    : `Hi Sahil, I saw the merchandise demo for ${where} on your site. I'd like a quote for printing${merchLabels.length ? `: ${merchLabels.join(", ")}` : ""}.`;
 
   return (
     <div className="demo-overlay" role="dialog" aria-modal="true" aria-labelledby="demo-window-title">
@@ -115,7 +121,8 @@ export default function DemoWindow({details, onClose}) {
           </button>
         </div>
 
-        <div className="demo-stage">
+        <div className={`demo-stage ${isSite ? "" : "demo-stage--merch"}`}>
+          {!isSite && <MerchPicker selected={merch} onChange={setMerch} suggested={suggested} />}
           <div className={`demo-frame demo-frame--${isSite ? device : "merch"}`}>
             <div className="demo-frame__bar" aria-hidden="true">
               <i />
@@ -150,7 +157,7 @@ export default function DemoWindow({details, onClose}) {
                 onCut={block}
                 onDragStart={block}
               >
-                {isSite ? <DemoSite details={details} /> : <MerchDemo details={details} />}
+                {isSite ? <DemoSite details={details} /> : <MerchDemo details={details} selected={merch} />}
                 <div className="demo-shield" style={{backgroundImage: watermark}} aria-hidden="true" />
               </div>
             </div>
