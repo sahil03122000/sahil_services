@@ -18,6 +18,13 @@ Almost everything you'll want to change is in **`src/config.js`**:
   multipliers, and the range shown to visitors. The "from ₹…" labels in the
   Services section read from here too.
 
+The free demo generator ("See your website before you pay") builds a sample
+site from the visitor's business name, type, city, phone and colour. Its
+eight business templates live in `src/demo/templates.js`. Nothing the
+visitor types is sent anywhere. The preview window blocks right-click,
+selection, copy, drag, save and print, and covers the preview with a
+"DEMO" watermark — this stops casual copying but not a determined developer.
+
 Section text lives in `src/components/` (one file per section). The service
 list and its four tabs (Build, Grow, Brand, Setup & care) are in
 `src/components/Services.jsx`.

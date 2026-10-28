@@ -3,10 +3,10 @@ import {Menu, X} from "lucide-react";
 
 const links = [
   {href: "#services", label: "Services"},
-  {href: "#pricing", label: "Price calculator"},
+  {href: "#demo", label: "Free demo"},
+  {href: "#pricing", label: "Pricing"},
   {href: "#work", label: "Work"},
   {href: "#about", label: "About"},
-  {href: "#process", label: "Process"},
   {href: "#faq", label: "FAQ"}
 ];
 

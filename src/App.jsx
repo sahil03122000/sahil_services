@@ -4,6 +4,7 @@ import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
 import Services from "./components/Services";
 import Calculator from "./components/Calculator";
+import DemoBuilder from "./components/DemoBuilder";
 import Work from "./components/Work";
 import About from "./components/About";
 import Process from "./components/Process";
@@ -28,6 +29,7 @@ export default function App() {
         <Hero />
         <Marquee />
         <Services />
+        <DemoBuilder />
         <Calculator onGetQuote={setPrefill} />
         <Work />
         <About />

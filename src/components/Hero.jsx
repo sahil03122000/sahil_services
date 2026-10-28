@@ -1,7 +1,6 @@
 import React from "react";
-import {ArrowRight, CalendarCheck, Calculator, Star} from "lucide-react";
+import {ArrowRight, CalendarCheck, Calculator, Eye, Star} from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
-import {whatsappUrl} from "../config";
 
 export default function Hero() {
   return (
@@ -40,21 +39,13 @@ export default function Hero() {
           </ul>
 
           <div className="hero__actions">
-            <a
-              className="btn btn--primary btn--lg"
-              href="#pricing"
-            >
+            <a className="btn btn--primary btn--lg" href="#demo">
+              <Eye size={20} aria-hidden="true" />
+              See your website demo
+            </a>
+            <a className="btn btn--glass btn--lg" href="#pricing">
               <Calculator size={20} aria-hidden="true" />
               Check your price
-            </a>
-            <a
-              className="btn btn--glass btn--lg"
-              href={whatsappUrl("Hi Sahil, I'd like a website for my business.")}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <WhatsAppIcon size={20} />
-              Chat on WhatsApp
             </a>
           </div>
 
