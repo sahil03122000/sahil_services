@@ -69,7 +69,9 @@ export default function DemoSite({details}) {
   const city = details.city || "your city";
   const fill = text => text.replace("{city}", city);
   const phone = details.phone || "98XXX XXXXX";
-  const HeroIcon = t.Icon;
+  // The visitor's own photo, or a stock photo for their type of business.
+  const photo = details.photo || `${import.meta.env.BASE_URL}assets/demo/${details.type}.jpg`;
+  const photoBg = {"--ds-photo": `url("${photo}")`};
 
   return (
     <div className="ds" style={{"--ds": details.color}}>
@@ -100,8 +102,7 @@ export default function DemoSite({details}) {
         <span className="ds-btn ds-btn--sm">{t.cta}</span>
       </header>
 
-      <section className="ds-hero">
-        <div className="ds-hero__glow" />
+      <section className="ds-hero ds-hero--photo" style={photoBg}>
         <div className="ds-hero__copy">
           <span className="ds-pill">
             <MapPin size={13} /> #1 choice in {city}
@@ -135,9 +136,6 @@ export default function DemoSite({details}) {
         </div>
 
         <div className="ds-hero__visual">
-          <div className="ds-hero__art">
-            <HeroIcon size={120} strokeWidth={1.2} />
-          </div>
           <HeroWidget widget={widget} fill={fill} />
         </div>
       </section>
@@ -207,7 +205,11 @@ export default function DemoSite({details}) {
         <h2>Take a look inside</h2>
         <div className="ds-gallery">
           {t.services.map(({Icon, title}, i) => (
-            <div key={title} className={`ds-gallery__tile ds-gallery__tile--${i}`}>
+            <div
+              key={title}
+              className={`ds-gallery__tile ds-gallery__tile--${i} ${i === 0 ? "ds-gallery__tile--photo" : ""}`}
+              style={i === 0 ? photoBg : undefined}
+            >
               <Icon size={36} strokeWidth={1.5} />
               <small>{title}</small>
             </div>

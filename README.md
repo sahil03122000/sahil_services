@@ -25,6 +25,15 @@ visitor types is sent anywhere. The preview window blocks right-click,
 selection, copy, drag, save and print, and covers the preview with a
 "DEMO" watermark — this stops casual copying but not a determined developer.
 
+The demo hero uses a stock photo per business type from
+`public/assets/demo/<type>.jpg`, or the visitor's own photo if they add one
+(kept in the browser, never uploaded). The stock photos are from Unsplash
+under the Unsplash License (free for commercial use, no attribution
+required); Unsplash IDs: clinic `photo-1758691462878`, ca `photo-1499750310107`,
+coaching `photo-1509062522246`, taxi `photo-1765446647632`, shop
+`photo-1776000680544`, gym `photo-1689877020200`, salon `photo-1792523297859`,
+restaurant `photo-1767114915989`. To change one, replace the file keeping its name.
+
 Section text lives in `src/components/` (one file per section). The service
 list and its four tabs (Build, Grow, Brand, Setup & care) are in
 `src/components/Services.jsx`.

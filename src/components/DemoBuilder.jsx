@@ -6,6 +6,31 @@ import {Reveal} from "../hooks/useReveal";
 
 const typeIds = Object.keys(TEMPLATES);
 
+/* Image chooser used for the logo and the business photo. */
+function ImagePick({label, hint, value, fallbackBg, cover, onFile, onRemove, accept}) {
+  const input = useRef(null);
+  return (
+    <div className="logo-pick">
+      <span className="logo-pick__label">{label}</span>
+      <div className="logo-pick__row">
+        <span className={`logo-pick__preview ${cover ? "logo-pick__preview--cover" : ""}`} style={{background: value ? "#fff" : fallbackBg}}>
+          {value ? <img src={value} alt="" /> : <ImagePlus size={20} aria-hidden="true" />}
+        </span>
+        <button type="button" className="logo-pick__btn" onClick={() => input.current?.click()}>
+          {value ? "Change" : "Upload"}
+        </button>
+        {value && (
+          <button type="button" className="logo-pick__remove" onClick={onRemove} aria-label={`Remove ${label.toLowerCase()}`}>
+            <X size={16} />
+          </button>
+        )}
+        <input ref={input} type="file" accept={accept} onChange={onFile} hidden />
+      </div>
+      <small>{hint}</small>
+    </div>
+  );
+}
+
 export default function DemoBuilder() {
   const [details, setDetails] = useState({
     name: "",
@@ -13,7 +38,8 @@ export default function DemoBuilder() {
     city: "",
     phone: "",
     color: COLORS[0].value,
-    logo: null
+    logo: null,
+    photo: null
   });
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
@@ -24,9 +50,8 @@ export default function DemoBuilder() {
     submitRef.current?.focus();
   }, []);
 
-  // The logo stays in the browser as a temporary object URL — never uploaded.
-  const logoInput = useRef(null);
-  const pickLogo = e => {
+  // Images stay in the browser as temporary object URLs — never uploaded.
+  const pickImage = field => e => {
     const file = e.target.files?.[0];
     e.target.value = "";
     if (!file) return;
@@ -34,22 +59,24 @@ export default function DemoBuilder() {
       setError("Please choose an image file (PNG or JPG).");
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-      setError("That image is too large — please use one under 5 MB.");
+    if (file.size > 8 * 1024 * 1024) {
+      setError("That image is too large — please use one under 8 MB.");
       return;
     }
     setError("");
-    setDetails(d => ({...d, logo: URL.createObjectURL(file)}));
+    setDetails(d => ({...d, [field]: URL.createObjectURL(file)}));
   };
-  const removeLogo = () => setDetails(d => ({...d, logo: null}));
+  const removeImage = field => () => setDetails(d => ({...d, [field]: null}));
 
-  // Free the previous image when the logo changes or the section unmounts.
+  // Free an image once it is replaced, removed, or the section unmounts.
   useEffect(() => {
     const url = details.logo;
-    return () => {
-      if (url) URL.revokeObjectURL(url);
-    };
+    return () => url && URL.revokeObjectURL(url);
   }, [details.logo]);
+  useEffect(() => {
+    const url = details.photo;
+    return () => url && URL.revokeObjectURL(url);
+  }, [details.photo]);
 
   const update = e => {
     const {name, value} = e.target;
@@ -132,34 +159,30 @@ export default function DemoBuilder() {
               </label>
             </div>
 
-            <div className="logo-pick">
-              <span className="logo-pick__label">Your logo (optional)</span>
-              <div className="logo-pick__row">
-                <span className="logo-pick__preview" style={{background: details.logo ? "#fff" : details.color}}>
-                  {details.logo ? (
-                    <img src={details.logo} alt="Your logo preview" />
-                  ) : (
-                    <ImagePlus size={20} aria-hidden="true" />
-                  )}
-                </span>
-                <button type="button" className="logo-pick__btn" onClick={() => logoInput.current?.click()}>
-                  {details.logo ? "Change logo" : "Upload logo"}
-                </button>
-                {details.logo && (
-                  <button type="button" className="logo-pick__remove" onClick={removeLogo} aria-label="Remove logo">
-                    <X size={16} />
-                  </button>
-                )}
-                <input
-                  ref={logoInput}
-                  type="file"
-                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
-                  onChange={pickLogo}
-                  hidden
-                />
-              </div>
-              <small>Shown on your website & merchandise demo. Stays on your device.</small>
+            <div className="demo-form__row">
+              <ImagePick
+                label="Your logo"
+                hint="Optional · on website & merchandise"
+                value={details.logo}
+                fallbackBg={details.color}
+                accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                onFile={pickImage("logo")}
+                onRemove={removeImage("logo")}
+              />
+              <ImagePick
+                label="Business photo"
+                hint="Optional · website background"
+                value={details.photo}
+                fallbackBg="#9ca3af"
+                cover
+                accept="image/png,image/jpeg,image/webp"
+                onFile={pickImage("photo")}
+                onRemove={removeImage("photo")}
+              />
             </div>
+            <p className="demo-form__privacy">
+              <Lock size={13} aria-hidden="true" /> Your images stay on your device — nothing is uploaded.
+            </p>
 
             <fieldset className="swatches">
               <legend>Brand colour</legend>
