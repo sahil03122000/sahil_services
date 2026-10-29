@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://sahilgupta03.github.io/sahil_services",
+  "homepage": "https://sahil03122000.github.io/sahil_services",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
