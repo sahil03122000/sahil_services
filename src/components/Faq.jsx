@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {ChevronDown} from "lucide-react";
 import {Reveal} from "../hooks/useReveal";
+import {MIN_ORDER} from "../config";
 
 const faqs = [
   {
@@ -33,7 +34,7 @@ const faqs = [
   },
   {
     q: "Do you also do printing — t-shirts, mugs, flex, pamphlets?",
-    a: "Yes, for businesses. T-shirts, hoodies, mugs, caps, flex banners, shop boards, pamphlets, brochures, visiting cards, bill books and more — I design them and get them printed through my trusted print partner. Price and delivery time depend on the item and quantity, so you get a clear quote first."
+    a: `Yes, for businesses. T-shirts, hoodies, mugs, caps, flex banners, shop boards, pamphlets, brochures, visiting cards, bill books and more — I design them and get them printed through my trusted print partner. Minimum order: ${MIN_ORDER.item} pieces per item (t-shirts, mugs, caps, ID cards…), ${MIN_ORDER.cards} visiting cards, ${MIN_ORDER.pamphlets.toLocaleString("en-IN")} pamphlets; flex and banners have no minimum. Price and delivery time depend on the item and quantity, so you get a clear quote first.`
   },
   {
     q: "How do payments work?",

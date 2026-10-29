@@ -1390,3 +1390,11 @@ body.demo-open .fab, body.demo-open .estimate-bar { display: none; }
 .logo-pick__preview--cover img { object-fit: cover; padding: 0; }
 .logo-pick .logo-pick__btn { flex: 1; }
 .demo-form__privacy { display: flex; align-items: center; gap: 6px; margin-top: -6px; font-size: 0.78rem; color: var(--muted); }
+
+/* Minimum order notes (Print services & merchandise demo) */
+.service-card__min {
+  display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+  margin-top: 12px !important; padding: 5px 10px; border-radius: 8px;
+  background: #eff6ff; color: #1d4ed8 !important; font-size: 0.8rem; font-weight: 700;
+}
+.merch__item figcaption small { display: block; margin-top: 2px; font-size: 0.72rem; font-weight: 600; color: #6b7280; }

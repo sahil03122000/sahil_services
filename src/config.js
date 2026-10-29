@@ -136,6 +136,23 @@ export const PRICING = {
   rangeHigh: 1.15
 };
 
+/* Minimum order quantities for printing — shown on the Print services, the
+   merchandise demo and the FAQ. Confirm these with your print partner. */
+export const MIN_ORDER = {
+  item: 15, // t-shirts, hoodies, mugs, caps, bottles, ID cards… (per item)
+  cards: 500, // visiting cards
+  pamphlets: 1000 // pamphlets, flyers, brochures
+};
+
+export const minLabel = kind =>
+  kind === "none"
+    ? "No minimum"
+    : kind === "cards"
+      ? `Min. ${MIN_ORDER.cards} cards`
+      : kind === "pamphlets"
+        ? `Min. ${MIN_ORDER.pamphlets.toLocaleString("en-IN")} pcs`
+        : `Min. ${MIN_ORDER.item} pcs per item`;
+
 // Lowest price for a calculator item, used for "from ₹…" labels.
 export const priceOf = id => {
   const all = [...PRICING.projects.map(p => ({id: p.id, price: p.base})), ...PRICING.features, ...PRICING.monthly];

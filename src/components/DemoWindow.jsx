@@ -4,7 +4,7 @@ import DemoSite from "./DemoSite";
 import MerchDemo, {CATALOG, SUGGESTED} from "./MerchDemo";
 import MerchPicker from "./MerchPicker";
 import WhatsAppIcon from "./WhatsAppIcon";
-import {CONTACT, priceOf, whatsappUrl} from "../config";
+import {CONTACT, MIN_ORDER, priceOf, whatsappUrl} from "../config";
 import {TEMPLATES} from "../demo/templates";
 import {BUILD_STEPS} from "../demo/extras";
 
@@ -187,11 +187,12 @@ export default function DemoWindow({details, onClose}) {
               <>
                 <p className="demo-window__price">
                   Get these printed — <b>free quote</b>
-                  <span> · bulk orders for businesses</span>
+                  <span> · min. {MIN_ORDER.item} pcs per item</span>
                 </p>
                 <p className="demo-window__note">
-                  Mockups for preview — final colours, sizes and print style are
-                  confirmed with you before printing.
+                  Minimum order: {MIN_ORDER.item} pcs per item · visiting cards {MIN_ORDER.cards} ·
+                  pamphlets {MIN_ORDER.pamphlets.toLocaleString("en-IN")} · flex no minimum. Mockups are
+                  previews — final colours and sizes are confirmed before printing.
                 </p>
               </>
             )}

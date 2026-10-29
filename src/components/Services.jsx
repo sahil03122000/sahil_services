@@ -10,6 +10,7 @@ import {
   MapPin,
   Megaphone,
   Newspaper,
+  Package,
   PenTool,
   Presentation,
   Search,
@@ -21,7 +22,7 @@ import {
   Image as ImageIcon
 } from "lucide-react";
 import WhatsAppIcon from "./WhatsAppIcon";
-import {priceOf} from "../config";
+import {MIN_ORDER, minLabel, priceOf} from "../config";
 import {Reveal} from "../hooks/useReveal";
 
 const inr = n => `₹${n.toLocaleString("en-IN")}`;
@@ -71,11 +72,11 @@ const categories = [
     blurb: "Merchandise & printing",
     tone: "blue",
     items: [
-      {Icon: Shirt, title: "T-shirts & hoodies", text: "Staff uniforms, event t-shirts and hoodies with your logo — designed by me, printed by my trusted print partner.", tags: ["Staff uniforms", "Events", "Bulk orders"]},
-      {Icon: Coffee, title: "Mugs, caps & gifts", text: "Coffee mugs, caps, diaries, pens and keychains with your logo — for staff, clients and festive gifting.", tags: ["Coffee mugs", "Caps", "Corporate gifts"]},
-      {Icon: Presentation, title: "Flex & banners", text: "Shop boards, flex banners, standees and event backdrops — designed and printed in the size you need.", tags: ["Shop boards", "Standees", "Any size"]},
-      {Icon: Newspaper, title: "Pamphlets & brochures", text: "Pamphlets, flyers, brochures and menu cards for your promotions — designed and printed in bulk.", tags: ["Flyers", "Brochures", "Menu cards"]},
-      {Icon: CreditCard, title: "Cards & stationery", text: "Visiting cards, letterheads, bill books, stickers and ID cards — everything with your brand on it.", tags: ["Visiting cards", "Bill books", "ID cards"]}
+      {Icon: Shirt, title: "T-shirts & hoodies", text: "Staff uniforms, event t-shirts and hoodies with your logo — designed by me, printed by my trusted print partner.", tags: ["Staff uniforms", "Events", "Bulk orders"], minimum: minLabel("item")},
+      {Icon: Coffee, title: "Mugs, caps & gifts", text: "Coffee mugs, caps, diaries, pens and keychains with your logo — for staff, clients and festive gifting.", tags: ["Coffee mugs", "Caps", "Corporate gifts"], minimum: minLabel("item")},
+      {Icon: Presentation, title: "Flex & banners", text: "Shop boards, flex banners, standees and event backdrops — designed and printed in the size you need.", tags: ["Shop boards", "Standees", "Any size"], minimum: `${minLabel("none")} · priced by size`},
+      {Icon: Newspaper, title: "Pamphlets & brochures", text: "Pamphlets, flyers, brochures and menu cards for your promotions — designed and printed in bulk.", tags: ["Flyers", "Brochures", "Menu cards"], minimum: minLabel("pamphlets")},
+      {Icon: CreditCard, title: "Cards & stationery", text: "Visiting cards, letterheads, bill books, stickers and ID cards — everything with your brand on it.", tags: ["Visiting cards", "Bill books", "ID cards"], minimum: `Visiting cards min. ${MIN_ORDER.cards} · ID cards min. ${MIN_ORDER.item}`}
     ]
   },
   {
@@ -161,7 +162,7 @@ export default function Services() {
           id={`panel-${current.id}`}
           aria-labelledby={`tab-${current.id}`}
         >
-          {current.items.map(({Icon, title, text, tags, price, monthly}, i) => {
+          {current.items.map(({Icon, title, text, tags, price, monthly, minimum}, i) => {
             const amount = price ? priceOf(price) : null;
             return (
               <article
@@ -186,6 +187,11 @@ export default function Services() {
                 </div>
                 <h3>{title}</h3>
                 <p>{text}</p>
+                {minimum && (
+                  <p className="service-card__min">
+                    <Package size={15} aria-hidden="true" /> {minimum}
+                  </p>
+                )}
                 <ul className="tags">
                   {tags.map(tag => (
                     <li key={tag}>{tag}</li>

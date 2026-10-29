@@ -1,6 +1,7 @@
 import React from "react";
 import {TEMPLATES} from "../demo/templates";
 import {fitFont, initials, shade} from "../demo/utils";
+import {MIN_ORDER, minLabel} from "../config";
 
 const FONT = "Plus Jakarta Sans, Arial, sans-serif";
 
@@ -296,9 +297,9 @@ export const CATALOG = [
   {id: "tote", label: "Tote bag", Comp: Tote, keywords: "bag tote jhola carry shopping thaila"},
   {id: "idcard", label: "ID card & lanyard", Comp: IdCard, keywords: "id card lanyard badge identity staff"},
   {id: "diary", label: "Diary", Comp: Diary, keywords: "diary notebook planner copy"},
-  {id: "pamphlet", label: "Pamphlet", Comp: Pamphlet, keywords: "pamphlet flyer leaflet brochure parcha poster"},
-  {id: "card", label: "Visiting card", Comp: VisitingCard, keywords: "visiting card business card", wide: true},
-  {id: "banner", label: "Shop flex banner", Comp: FlexBanner, keywords: "flex banner board hoarding signboard", wide: true}
+  {id: "pamphlet", label: "Pamphlet", Comp: Pamphlet, keywords: "pamphlet flyer leaflet brochure parcha poster", min: "pamphlets"},
+  {id: "card", label: "Visiting card", Comp: VisitingCard, keywords: "visiting card business card", wide: true, min: "cards"},
+  {id: "banner", label: "Shop flex banner", Comp: FlexBanner, keywords: "flex banner board hoarding signboard", wide: true, min: "none"}
 ];
 
 // Pre-selected items for each business type.
@@ -324,12 +325,15 @@ export default function MerchDemo({details, selected}) {
       </div>
       {items.length ? (
         <div className="merch__grid">
-          {items.map(({id, label, Comp, wide}) => (
+          {items.map(({id, label, Comp, wide, min = "item"}) => (
             <figure key={id} className={`merch__item ${wide ? "merch__item--wide" : ""}`}>
               <div className="merch__stage">
                 <Comp d={details} />
               </div>
-              <figcaption>{label}</figcaption>
+              <figcaption>
+                {label}
+                <small>{min === "item" ? `Min. ${MIN_ORDER.item} pcs` : minLabel(min)}</small>
+              </figcaption>
             </figure>
           ))}
         </div>
