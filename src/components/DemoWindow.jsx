@@ -25,6 +25,11 @@ export default function DemoWindow({details, onClose}) {
   const [device, setDevice] = useState("desktop");
   const [view, setView] = useState("website"); // website | merch
   const isSite = view === "website";
+
+  // Start each view / size from the top of the preview.
+  useEffect(() => {
+    overlayRef.current?.scrollTo({top: 0});
+  }, [view, device]);
   const suggested = SUGGESTED[details.type];
   const [merch, setMerch] = useState(suggested);
   const merchLabels = CATALOG.filter(i => merch.includes(i.id)).map(i => i.label);
@@ -39,6 +44,7 @@ export default function DemoWindow({details, onClose}) {
     return () => clearTimeout(timer);
   }, [step, building]);
   const closeRef = useRef(null);
+  const overlayRef = useRef(null);
   const t = TEMPLATES[details.type];
 
   useEffect(() => {
@@ -64,7 +70,7 @@ export default function DemoWindow({details, onClose}) {
     : `Hi Sahil, I saw the merchandise demo for ${where} on your site. I'd like a quote for printing${merchLabels.length ? `: ${merchLabels.join(", ")}` : ""}.`;
 
   return (
-    <div className="demo-overlay" role="dialog" aria-modal="true" aria-labelledby="demo-window-title">
+    <div ref={overlayRef} className="demo-overlay" role="dialog" aria-modal="true" aria-labelledby="demo-window-title">
       <div className="demo-window">
         <div className="demo-window__top">
           <div>
@@ -103,7 +109,7 @@ export default function DemoWindow({details, onClose}) {
               className={device === "desktop" ? "is-active" : ""}
               onClick={() => setDevice("desktop")}
             >
-              <Monitor size={16} /> Desktop
+              <Monitor size={16} /> <span>Desktop</span>
             </button>
             <button
               type="button"
@@ -112,7 +118,7 @@ export default function DemoWindow({details, onClose}) {
               className={device === "mobile" ? "is-active" : ""}
               onClick={() => setDevice("mobile")}
             >
-              <Smartphone size={16} /> Mobile
+              <Smartphone size={16} /> <span>Mobile</span>
             </button>
           </div>
 
