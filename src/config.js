@@ -12,7 +12,7 @@ export const CONTACT = {
   // sends an activation email to `email` — open it and click "Activate Form"
   // once. Optional: paste a free key from https://web3forms.com here to use
   // Web3Forms instead. Either way the key/email is safe to publish.
-  web3formsKey: "",
+  web3formsKey: "219f0eaf-32dd-44ee-bca4-98290c74d147",
   // Your photo for the About section: put the file in public/assets/ and
   // write its name here, e.g. "sahil.jpg". Leave empty to show initials.
   photo: "sahil.jpg",
