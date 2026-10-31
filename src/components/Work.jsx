@@ -38,7 +38,7 @@ export default function Work() {
         <Reveal className="section-head">
           <p className="eyebrow">Recent work</p>
           <h2 id="work-title" className="section-title">
-            Projects that are <em>live &amp; working</em>
+            Projects <em>built for clients</em>
           </h2>
         </Reveal>
 
@@ -83,11 +83,12 @@ export default function Work() {
               />
             </div>
             <div className="work-card__body">
-              <p className="work-card__kind">Mobile app · Service booking</p>
+              <p className="work-card__kind">Client project · Mobile app</p>
               <h3>Ziclo</h3>
+              <p className="work-card__status">In development</p>
               <p>
-                An Android &amp; iPhone app for booking solar and AC services — the
-                kind of booking system I can build for your business too.
+                An Android &amp; iPhone app I am building for a client, for booking
+                solar and AC services. The planned features include:
               </p>
               <ul className="checks">
                 {zicloPoints.map(point => (

@@ -153,6 +153,10 @@ export const minLabel = kind =>
         ? `Min. ${MIN_ORDER.pamphlets.toLocaleString("en-IN")} pcs`
         : `Min. ${MIN_ORDER.item} pcs per item`;
 
+/* Real client reviews, shown after Recent work. Add only words a client has
+   approved: {quote: "...", name: "Client name", business: "Business"} */
+export const CLIENT_REVIEWS = [];
+
 // Lowest price for a calculator item, used for "from ₹…" labels.
 export const priceOf = id => {
   const all = [...PRICING.projects.map(p => ({id: p.id, price: p.base})), ...PRICING.features, ...PRICING.monthly];

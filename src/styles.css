@@ -1398,3 +1398,15 @@ body.demo-open .fab, body.demo-open .estimate-bar { display: none; }
   background: #eff6ff; color: #1d4ed8 !important; font-size: 0.8rem; font-weight: 700;
 }
 .merch__item figcaption small { display: block; margin-top: 2px; font-size: 0.72rem; font-weight: 600; color: #6b7280; }
+
+/* Client reviews */
+.client-reviews { display: grid; gap: 18px; }
+@media (min-width: 760px) { .client-reviews { grid-template-columns: repeat(2, 1fr); } }
+.client-review { margin: 0; padding: 28px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+.client-review > svg { color: var(--violet); }
+.client-review blockquote { margin: 14px 0 18px; font-size: 1.05rem; color: var(--ink-2); }
+.client-review b, .client-review small { display: block; }
+.client-review small { color: var(--muted); }
+
+.work-card__status { display: inline-flex; align-items: center; gap: 7px; margin-top: 10px; padding: 5px 11px; border-radius: 999px; background: #fff1e8; color: #c2410c; font-size: 0.8rem; font-weight: 800; }
+.work-card__status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }

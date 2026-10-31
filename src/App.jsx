@@ -6,6 +6,7 @@ import Services from "./components/Services";
 import Calculator from "./components/Calculator";
 import DemoBuilder from "./components/DemoBuilder";
 import Work from "./components/Work";
+import ClientReviews from "./components/ClientReviews";
 import About from "./components/About";
 import Process from "./components/Process";
 import Why from "./components/Why";
@@ -32,6 +33,7 @@ export default function App() {
         <DemoBuilder />
         <Calculator onGetQuote={setPrefill} />
         <Work />
+        <ClientReviews />
         <About />
         <Process />
         <Why />
