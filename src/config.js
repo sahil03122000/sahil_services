@@ -156,7 +156,15 @@ export const minLabel = kind =>
 /* Real client reviews, shown after Recent work. Add only words a client has
    approved: {quote: "...", translation: "optional English", name: "Client name",
    business: "Business"}. Drafts awaiting approval live in drafts/ (not published). */
-export const CLIENT_REVIEWS = [];
+export const CLIENT_REVIEWS = [
+  {
+    // Approved by Jitesh Gupta.
+    quote: "हमारे समाज के लिए वेबसाइट बनवाना एक सपना था, जिसे साहिल ने समय पर और बहुत खूबसूरती से पूरा किया। अब हमारे कार्यक्रम, समाज की उपलब्धियाँ और यादगार पल सब एक ही जगह पर हैं — हिंदी और अंग्रेज़ी दोनों में। समाज के हर सदस्य ने इसकी तारीफ़ की। धन्यवाद साहिल!",
+    translation: "Having a website for our samaj was a dream, and Sahil made it happen — beautifully and on time. Our events, achievements and memorable moments are now in one place, in both Hindi and English. Every member of our community has praised it. Thank you, Sahil!",
+    name: "Jitesh Gupta",
+    business: "Pradhan, Mahawar Samaj Ateli"
+  }
+];
 
 // Lowest price for a calculator item, used for "from ₹…" labels.
 export const priceOf = id => {

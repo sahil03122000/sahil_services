@@ -16,7 +16,7 @@ export default function ClientReviews() {
             What clients <em>say</em>
           </h2>
         </Reveal>
-        <div className="client-reviews">
+        <div className={`client-reviews ${CLIENT_REVIEWS.length === 1 ? "client-reviews--single" : ""}`}>
           {CLIENT_REVIEWS.map((review, i) => (
             <Reveal as="figure" key={review.name} className="client-review" delay={i * 100}>
               <Quote size={28} aria-hidden="true" />

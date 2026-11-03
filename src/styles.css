@@ -1412,3 +1412,6 @@ body.demo-open .fab, body.demo-open .estimate-bar { display: none; }
 .work-card__status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .checks--inline { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; }
 .client-review__translation { margin: -8px 0 18px; color: var(--muted); font-size: 0.92rem; font-style: italic; }
+.client-reviews--single { grid-template-columns: 1fr !important; max-width: 780px; margin-inline: auto; text-align: center; }
+.client-reviews--single .client-review > svg { margin-inline: auto; }
+.client-reviews--single .client-review blockquote { font-size: 1.15rem; }
