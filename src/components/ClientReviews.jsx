@@ -21,6 +21,7 @@ export default function ClientReviews() {
             <Reveal as="figure" key={review.name} className="client-review" delay={i * 100}>
               <Quote size={28} aria-hidden="true" />
               <blockquote>{review.quote}</blockquote>
+              {review.translation && <p className="client-review__translation">{review.translation}</p>}
               <figcaption>
                 <b>{review.name}</b>
                 <small>{review.business}</small>

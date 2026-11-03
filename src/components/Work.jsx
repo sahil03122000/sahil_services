@@ -19,7 +19,8 @@ const sites = [
     text: "A community website with events and updates, built to be simple to use and fast on mobile.",
     image: asset("mahavar-samaj.jpg"),
     url: "https://mahavarsamajateli.in/",
-    domain: "mahavarsamajateli.in"
+    domain: "mahavarsamajateli.in",
+    highlights: ["Delivered on time", "Hindi & English", "Events, news & gallery"]
   }
 ];
 
@@ -65,6 +66,15 @@ export default function Work() {
                 <p className="work-card__kind">{site.kind}</p>
                 <h3>{site.name}</h3>
                 <p>{site.text}</p>
+                {site.highlights && (
+                  <ul className="checks checks--inline">
+                    {site.highlights.map(point => (
+                      <li key={point}>
+                        <Check size={16} strokeWidth={3} aria-hidden="true" /> {point}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <a className="link" href={site.url} target="_blank" rel="noopener noreferrer">
                   Visit {site.domain} <ArrowUpRight size={16} aria-hidden="true" />
                 </a>

@@ -3,3 +3,6 @@ dist
 .cache
 *.log
 .env
+
+# Local drafts (e.g. reviews awaiting client approval) — never published
+drafts/

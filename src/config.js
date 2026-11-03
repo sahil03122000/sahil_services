@@ -154,7 +154,8 @@ export const minLabel = kind =>
         : `Min. ${MIN_ORDER.item} pcs per item`;
 
 /* Real client reviews, shown after Recent work. Add only words a client has
-   approved: {quote: "...", name: "Client name", business: "Business"} */
+   approved: {quote: "...", translation: "optional English", name: "Client name",
+   business: "Business"}. Drafts awaiting approval live in drafts/ (not published). */
 export const CLIENT_REVIEWS = [];
 
 // Lowest price for a calculator item, used for "from ₹…" labels.
