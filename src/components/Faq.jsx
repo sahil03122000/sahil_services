@@ -5,12 +5,16 @@ import {MIN_ORDER} from "../config";
 
 const faqs = [
   {
-    q: "Monthly plan or one-time payment — which is better for me?",
-    a: "If you want a simple website without paying a big amount upfront, choose a monthly plan. If you need booking, an online store, an app or a bigger custom website, use the calculator for a one-time quote."
+    q: "Complete Website package or Starter monthly plan — which is better for me?",
+    a: "If you can pay once, the ₹9,999 Complete Website package is the best value: up to 5 pages, domain and hosting for a year, SEO, Google listing and 3 months of free support. If you don't want a big payment upfront, start with the Starter monthly plan. For booking, an online store, an app or software, use the calculator."
   },
   {
-    q: "How do the monthly plans work?",
-    a: "You pay every month and I look after your website, domain, hosting and Google listing. Plans run for a minimum of 12 months, then you can cancel anytime. There is no setup fee, and the domain is registered in your name, so it's always yours."
+    q: "What happens after the 3 free months of support?",
+    a: "You can choose a care plan (from ₹499/month) for regular changes, SEO and posts — or skip it and pay per change. From the second year, domain and hosting renewal is about ₹2,500–3,000 a year. The domain is always in your name."
+  },
+  {
+    q: "How does the Starter monthly plan work?",
+    a: "You pay ₹999 for the first 3 months, then ₹499 a month. It runs for a minimum of 12 months, then you can cancel anytime. There is no setup fee, and the domain is registered in your name."
   },
   {
     q: "Is the calculator price final?",

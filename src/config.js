@@ -136,17 +136,36 @@ export const PRICING = {
   rangeHigh: 1.15
 };
 
-/* Monthly plans — a ready website for a small monthly fee, shown in their own
-   section above the calculator. Custom projects still go through the calculator.
+/* Plans section — two ways to get a website, then optional care plans.
+   Shown above the calculator; bigger custom projects still use the calculator.
    `offer` is an optional intro price shown before the regular `price`. */
-export const MONTHLY_PLANS = {
-  plans: [
+export const PLANS = {
+  packages: [
+    {
+      id: "complete",
+      name: "Complete Website",
+      tag: "Pay once",
+      for: "Everything to get your business online — one payment",
+      price: 9999,
+      priceNote: "50% advance, 50% when your website goes live",
+      popular: true,
+      features: [
+        "Website up to 5 pages",
+        "Domain (.in / .com) for 1 year, in your name",
+        "Hosting & SSL (https) for 1 year",
+        "SEO setup + Google Business Profile (Maps)",
+        "WhatsApp, call buttons & enquiry form",
+        "3 months of free support"
+      ]
+    },
     {
       id: "starter",
       name: "Starter",
-      for: "For small shops getting online for the first time",
+      tag: "Pay monthly",
+      for: "For small shops that don't want a big payment upfront",
       offer: {price: 999, months: 3},
       price: 499,
+      priceNote: "minimum 12 months, then cancel anytime",
       features: [
         "1-page website with all your details",
         ".in domain registered in your name",
@@ -155,40 +174,37 @@ export const MONTHLY_PLANS = {
         "Shown on Google Maps",
         "2 small changes every month"
       ]
+    }
+  ],
+  // Monthly support after the 3 free months (or an upgrade for Starter).
+  care: [
+    {
+      id: "basic",
+      name: "Basic Care",
+      price: 499,
+      features: ["2 small changes a month", "Backups & security updates", "Website kept running smoothly"]
     },
     {
       id: "growth",
-      name: "Growth",
-      for: "For businesses that want more customers from Google",
+      name: "Growth Care",
       price: 1499,
       popular: true,
-      features: [
-        "Everything in Starter",
-        "Up to 5-page website",
-        "Google Business Profile setup + 4 posts a month",
-        "Monthly SEO work for local searches",
-        "5 changes every month",
-        "Monthly report of calls & visits"
-      ]
+      features: ["Everything in Basic", "Monthly local SEO work", "4 Google Business posts a month", "Monthly report of calls & visits"]
     },
     {
       id: "pro",
-      name: "Pro",
-      for: "For businesses that want to grow on social media too",
+      name: "Pro Care",
       price: 3999,
-      features: [
-        "Everything in Growth",
-        "12 social media posts a month",
-        "2 banner / poster designs a month",
-        "Festival & offer creatives",
-        "Priority support, same-day changes"
-      ]
+      features: ["Everything in Growth", "12 social media posts a month", "2 banner / poster designs a month", "Same-day changes"]
     }
   ],
+  // Price of a one-off change for sites without a care plan.
+  perChange: "₹300–500",
+  renewal: "₹2,500–3,000 a year",
   terms: [
-    "Minimum 12 months, then cancel anytime",
-    "No setup fee",
-    "Domain stays in your name — always yours"
+    "Domain always in your name",
+    "No hidden charges",
+    "Care plans are optional"
   ]
 };
 
