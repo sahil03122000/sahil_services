@@ -175,13 +175,13 @@ export default function Calculator({onGetQuote}) {
     <section className="section section--calc" id="pricing" aria-labelledby="pricing-title">
       <div className="container">
         <Reveal className="section-head section-head--center">
-          <p className="eyebrow">Price calculator</p>
+          <p className="eyebrow">Custom project calculator</p>
           <h2 id="pricing-title" className="section-title">
             Know your cost in <em>30 seconds</em>
           </h2>
           <p className="section-lead">
-            Website, app, SEO, ads or branding — pick what you need and see an
-            instant estimate. No sign-up, no obligation.
+            Booking, store, app, software or a bigger website — pick what you
+            need and see an instant one-time estimate. No sign-up, no obligation.
           </p>
         </Reveal>
 

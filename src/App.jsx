@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
 import Services from "./components/Services";
+import Plans from "./components/Plans";
 import Calculator from "./components/Calculator";
 import DemoBuilder from "./components/DemoBuilder";
 import Work from "./components/Work";
@@ -31,6 +32,7 @@ export default function App() {
         <Marquee />
         <Services />
         <DemoBuilder />
+        <Plans />
         <Calculator onGetQuote={setPrefill} />
         <Work />
         <ClientReviews />

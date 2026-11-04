@@ -136,6 +136,62 @@ export const PRICING = {
   rangeHigh: 1.15
 };
 
+/* Monthly plans — a ready website for a small monthly fee, shown in their own
+   section above the calculator. Custom projects still go through the calculator.
+   `offer` is an optional intro price shown before the regular `price`. */
+export const MONTHLY_PLANS = {
+  plans: [
+    {
+      id: "starter",
+      name: "Starter",
+      for: "For small shops getting online for the first time",
+      offer: {price: 999, months: 3},
+      price: 499,
+      features: [
+        "1-page website with all your details",
+        ".in domain registered in your name",
+        "Hosting & SSL (https) included",
+        "WhatsApp & call buttons",
+        "Shown on Google Maps",
+        "2 small changes every month"
+      ]
+    },
+    {
+      id: "growth",
+      name: "Growth",
+      for: "For businesses that want more customers from Google",
+      price: 1499,
+      popular: true,
+      features: [
+        "Everything in Starter",
+        "Up to 5-page website",
+        "Google Business Profile setup + 4 posts a month",
+        "Monthly SEO work for local searches",
+        "5 changes every month",
+        "Monthly report of calls & visits"
+      ]
+    },
+    {
+      id: "pro",
+      name: "Pro",
+      for: "For businesses that want to grow on social media too",
+      price: 3999,
+      features: [
+        "Everything in Growth",
+        "12 social media posts a month",
+        "2 banner / poster designs a month",
+        "Festival & offer creatives",
+        "Priority support, same-day changes"
+      ]
+    }
+  ],
+  terms: [
+    "Minimum 12 months, then cancel anytime",
+    "No setup fee",
+    "Domain stays in your name — always yours"
+  ]
+};
+
 /* Minimum order quantities for printing — shown on the Print services, the
    merchandise demo and the FAQ. Confirm these with your print partner. */
 export const MIN_ORDER = {

@@ -5,6 +5,14 @@ import {MIN_ORDER} from "../config";
 
 const faqs = [
   {
+    q: "Monthly plan or one-time payment — which is better for me?",
+    a: "If you want a simple website without paying a big amount upfront, choose a monthly plan. If you need booking, an online store, an app or a bigger custom website, use the calculator for a one-time quote."
+  },
+  {
+    q: "How do the monthly plans work?",
+    a: "You pay every month and I look after your website, domain, hosting and Google listing. Plans run for a minimum of 12 months, then you can cancel anytime. There is no setup fee, and the domain is registered in your name, so it's always yours."
+  },
+  {
     q: "Is the calculator price final?",
     a: "It's a close estimate. After a quick free call I send a fixed quote, so you know the exact price before any work starts."
   },
