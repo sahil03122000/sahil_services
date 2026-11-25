@@ -4,7 +4,7 @@ import DemoSite from "./DemoSite";
 import MerchDemo, {CATALOG, SUGGESTED} from "./MerchDemo";
 import MerchPicker from "./MerchPicker";
 import WhatsAppIcon from "./WhatsAppIcon";
-import {CONTACT, MIN_ORDER, priceOf, whatsappUrl} from "../config";
+import {CONTACT, MIN_ORDER, PLANS, whatsappUrl} from "../config";
 import {TEMPLATES} from "../demo/templates";
 import {BUILD_STEPS} from "../demo/extras";
 
@@ -175,8 +175,8 @@ export default function DemoWindow({details, onClose}) {
             {isSite ? (
               <>
                 <p className="demo-window__price">
-                  Get this website from <b>₹{priceOf("website").toLocaleString("en-IN")}</b>
-                  <span> · live in 7–10 days</span>
+                  Get this website from <b>₹{PLANS.packages.find(p => p.offer).offer.price}</b>
+                  <span> · or ₹{PLANS.packages[0].price.toLocaleString("en-IN")} one-time · live in 7–10 days</span>
                 </p>
                 <p className="demo-window__note">
                   Sample text, numbers & reviews — your site gets your real details,

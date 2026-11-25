@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import {Check, Eye, ImagePlus, Lock, X} from "lucide-react";
 import DemoWindow from "./DemoWindow";
 import {COLORS, TEMPLATES} from "../demo/templates";
+import {readDemoLink} from "../demo/link";
 import {Reveal} from "../hooks/useReveal";
 
 const typeIds = Object.keys(TEMPLATES);
@@ -44,6 +45,14 @@ export default function DemoBuilder() {
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
   const submitRef = useRef(null);
+
+  // A shared demo link (?n=…&t=…) fills the form and opens the demo straight away.
+  useEffect(() => {
+    const shared = readDemoLink();
+    if (!shared) return;
+    setDetails(d => ({...d, ...shared}));
+    setOpen(true);
+  }, []);
 
   const close = useCallback(() => {
     setOpen(false);
